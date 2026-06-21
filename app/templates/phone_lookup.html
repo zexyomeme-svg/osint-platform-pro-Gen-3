@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="mb-10">
+        <h1 class="text-4xl font-bold mb-3">Phone <span class="text-emerald-400">Intelligence</span></h1>
+        <p class="text-zinc-400 text-lg">Generate high-precision pivot links for phone number identification.</p>
+    </div>
+
+    <div class="glass p-8 rounded-3xl mb-10 neon-blue" style="border-color: rgba(16, 185, 129, 0.4); box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);">
+        <div class="flex flex-col md:flex-row gap-4">
+            <div class="relative flex-grow">
+                <i class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"></i>
+                <input type="text" id="phone-input" placeholder="Enter Phone Number (e.g. +1234567890)" 
+                       class="w-full pl-12 pr-4 py-4 bg-zinc-900 border border-zinc-800 rounded-2xl focus:outline-none focus:border-emerald-400 mono text-lg transition-all">
+            </div>
+            <button onclick="runPhoneLookup()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-3 shadow-lg shadow-emerald-600/20">
+                <i class="fa-solid fa-link"></i> Generate
+            </button>
+        </div>
+        
+        <div class="mt-8">
+            <div class="flex justify-between text-xs mono text-zinc-500 mb-3">
+                <span id="progress-text" class="uppercase tracking-widest">Ready</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
+                <div id="progress-bar" class="progress-bar bg-emerald-400 h-full w-0"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="results" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <!-- Links injected here -->
+    </div>
+</div>
+
+<script>
+    async function runPhoneLookup() {
+        const phone = document.getElementById('phone-input').value;
+        if (!phone) return alert("Please enter a phone number");
+
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.classList.add('hidden');
+        resultsDiv.innerHTML = '';
+
+        showProgress('progress', async () => {
+            const res = await fetch(`/api/phone/${phone}`);
+            const data = await res.json();
+
+            for (const [platform, url] of Object.entries(data)) {
+                resultsDiv.innerHTML += `
+                    <a href="${url}" target="_blank" class="glass p-8 rounded-3xl border-l-4 border-emerald-500 hover:bg-zinc-800/50 transition-all card-hover flex justify-between items-center group">
+                        <div>
+                            <div class="text-zinc-500 text-[10px] uppercase font-bold mb-2 tracking-widest">${platform}</div>
+                            <div class="text-zinc-200 font-bold text-lg">Search on ${platform}</div>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors">
+                            <i class="fa-solid fa-external-link text-zinc-600 group-hover:text-emerald-400 text-sm"></i>
+                        </div>
+                    </a>
+                `;
+            }
+            resultsDiv.classList.remove('hidden');
+        });
+    }
+</script>
+{% endblock %}

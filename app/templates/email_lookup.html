@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="mb-10">
+        <h1 class="text-4xl font-bold mb-3">Email <span class="text-blue-400">Intelligence</span></h1>
+        <p class="text-zinc-400 text-lg">Domain legitimacy and mail server configuration audit.</p>
+    </div>
+
+    <div class="glass p-8 rounded-3xl mb-10 neon-blue">
+        <div class="flex flex-col md:flex-row gap-4">
+            <div class="relative flex-grow">
+                <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"></i>
+                <input type="text" id="email-input" placeholder="Enter Email (e.g. target@gmail.com)" 
+                       class="w-full pl-12 pr-4 py-4 bg-zinc-900 border border-zinc-800 rounded-2xl focus:outline-none focus:border-blue-400 mono text-lg transition-all">
+            </div>
+            <button onclick="runEmailLookup()" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-3 shadow-lg shadow-blue-600/20">
+                <i class="fa-solid fa-envelope-circle-check"></i> Verify
+            </button>
+        </div>
+        
+        <div class="mt-8">
+            <div class="flex justify-between text-xs mono text-zinc-500 mb-3">
+                <span id="progress-text" class="uppercase tracking-widest">Ready</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
+                <div id="progress-bar" class="progress-bar bg-blue-400 h-full w-0"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="results" class="hidden space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div class="glass p-12 rounded-3xl text-center border-b-8 transition-all" id="status-card">
+            <div id="status-icon" class="text-7xl mb-6"></div>
+            <h2 id="status-text" class="text-3xl font-bold mb-3"></h2>
+            <p id="status-desc" class="text-zinc-400 text-lg max-w-md mx-auto"></p>
+        </div>
+
+        <div class="glass p-8 rounded-3xl">
+            <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+                <i class="fa-solid fa-server text-blue-400"></i> MX Infrastructure Profile
+            </h3>
+            <div id="mx-list" class="space-y-3 mono text-sm">
+                <!-- MX records -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function runEmailLookup() {
+        const email = document.getElementById('email-input').value;
+        if (!email || !email.includes('@')) return alert("Please enter a valid email address");
+
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.classList.add('hidden');
+
+        showProgress('progress', async () => {
+            const res = await fetch(`/api/email/${email}`);
+            const data = await res.json();
+
+            const icon = document.getElementById('status-icon');
+            const text = document.getElementById('status-text');
+            const desc = document.getElementById('status-desc');
+            const mxList = document.getElementById('mx-list');
+            const card = document.getElementById('status-card');
+
+            if (data.valid_domain) {
+                icon.innerText = '✅';
+                text.innerText = 'Domain Verified';
+                text.className = 'text-3xl font-bold mb-3 text-emerald-400';
+                desc.innerText = 'The domain is active and configured to accept incoming email traffic.';
+                card.className = 'glass p-12 rounded-3xl text-center border-b-8 border-emerald-500';
+                
+                mxList.innerHTML = data.mx_records.map(mx => `
+                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-800 text-zinc-300 hover:border-blue-500/50 transition-colors">${mx}</div>
+                `).join('');
+            } else {
+                icon.innerText = '❌';
+                text.innerText = 'Domain Invalid';
+                text.className = 'text-3xl font-bold mb-3 text-red-400';
+                desc.innerText = data.status;
+                card.className = 'glass p-12 rounded-3xl text-center border-b-8 border-red-500';
+                mxList.innerHTML = '<div class="text-zinc-600 italic p-4 bg-zinc-900 rounded-xl border border-zinc-800">No active MX records detected.</div>';
+            }
+
+            resultsDiv.classList.remove('hidden');
+        });
+    }
+</script>
+{% endblock %}

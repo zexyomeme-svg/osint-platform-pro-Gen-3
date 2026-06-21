@@ -1,32 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="max-w-4xl mx-auto">
-    <div class="mb-8">
-        <h1 class="text-3xl font-bold mb-2">Identity <span class="text-emerald-500">Lookup</span></h1>
-        <p class="text-zinc-400">Scan across multiple social platforms to locate digital footprints associated with a username.</p>
+    <div class="mb-10">
+        <h1 class="text-4xl font-bold mb-3">Identity <span class="text-emerald-500">Mapping</span></h1>
+        <p class="text-zinc-400 text-lg">Cross-platform footprint analysis across digital ecosystems.</p>
     </div>
 
-    <div class="glass p-6 rounded-2xl mb-8">
+    <div class="glass p-8 rounded-3xl mb-10 neon-blue" style="border-color: rgba(16, 185, 129, 0.4); box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);">
         <div class="flex flex-col md:flex-row gap-4">
-            <input type="text" id="username-input" placeholder="Enter Username (e.g. jsmith)" 
-                   class="flex-grow bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 mono">
-            <button onclick="runUsernameLookup()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-lg font-bold transition-all flex items-center justify-center gap-2">
-                <i class="fa-solid fa-user-secret"></i> Scan Identity
+            <div class="relative flex-grow">
+                <i class="fa-solid fa-user-secret absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"></i>
+                <input type="text" id="username-input" placeholder="Enter Username (e.g. jsmith)" 
+                       class="w-full pl-12 pr-4 py-4 bg-zinc-900 border border-zinc-800 rounded-2xl focus:outline-none focus:border-emerald-500 mono text-lg transition-all">
+            </div>
+            <button onclick="runUsernameLookup()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-3 shadow-lg shadow-emerald-600/20">
+                <i class="fa-solid fa-fingerprint"></i> Scan Identity
             </button>
         </div>
         
-        <div class="mt-6">
-            <div class="flex justify-between text-xs mono text-zinc-500 mb-2">
-                <span id="progress-text">Ready</span>
+        <div class="mt-8">
+            <div class="flex justify-between text-xs mono text-zinc-500 mb-3">
+                <span id="progress-text" class="uppercase tracking-widest">Ready</span>
                 <span id="progress-percent">0%</span>
             </div>
-            <div class="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
+            <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
                 <div id="progress-bar" class="progress-bar bg-emerald-500 h-full w-0"></div>
             </div>
         </div>
     </div>
 
-    <div id="results" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div id="results" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
         <!-- Results injected here -->
     </div>
 </div>
@@ -47,19 +50,19 @@
             for (const [platform, info] of Object.entries(data)) {
                 const isFound = info.status === 'Found';
                 resultsDiv.innerHTML += `
-                    <div class="glass p-4 rounded-xl border-l-4 ${isFound ? 'border-emerald-500' : 'border-zinc-700'} transition-all hover:scale-105">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="font-bold text-zinc-200">${platform}</span>
-                            <span class="text-[10px] uppercase px-2 py-0.5 rounded ${isFound ? 'bg-emerald-500/20 text-emerald-400' : 'bg-zinc-800 text-zinc-500'}">
+                    <div class="glass p-6 rounded-3xl border-l-4 ${isFound ? 'border-emerald-500' : 'border-zinc-800'} transition-all card-hover">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="font-bold text-zinc-200 text-lg">${platform}</span>
+                            <span class="text-[10px] uppercase px-2 py-1 rounded-full font-bold ${isFound ? 'bg-emerald-500/20 text-emerald-400' : 'bg-zinc-800 text-zinc-500'}">
                                 ${info.status}
                             </span>
                         </div>
                         ${isFound ? `
-                            <a href="${info.url}" target="_blank" class="text-xs text-emerald-400 hover:underline mono break-all">
+                            <a href="${info.url}" target="_blank" class="text-xs text-emerald-400 hover:text-emerald-300 mono block truncate bg-zinc-900 p-2 rounded-lg border border-zinc-800">
                                 ${info.url}
                             </a>
                         ` : `
-                            <span class="text-xs text-zinc-600 italic">No profile detected</span>
+                            <span class="text-xs text-zinc-600 italic block p-2">No profile detected</span>
                         `}
                     </div>
                 `;

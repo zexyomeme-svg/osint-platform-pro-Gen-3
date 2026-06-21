@@ -1,68 +1,143 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="max-w-5xl mx-auto">
-    <div class="text-center mb-12">
-        <h1 class="text-5xl font-extrabold mb-4 tracking-tight">Welcome to <span class="gradient-text">Nexus Intelligence</span></h1>
-        <p class="text-zinc-400 text-lg max-w-2xl mx-auto">
-            A professional-grade open source intelligence framework designed for rapid reconnaissance and digital footprint analysis.
+<div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+        <h1 class="text-6xl font-extrabold mb-6 tracking-tighter">
+            Nexus <span class="gradient-text">Intelligence</span>
+        </h1>
+        <p class="text-zinc-400 text-lg max-w-3xl mx-auto leading-relaxed">
+            The premier open-source intelligence framework for digital reconnaissance, footprint analysis, and identity mapping. Engineered for speed and precision.
         </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="glass p-6 rounded-2xl hover:neon-border transition-all group cursor-pointer" onclick="window.location.href='/ip-lookup'">
-            <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500/40 transition-colors">
-                <i class="fa-solid fa-location-dot text-blue-500 text-xl"></i>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- IP Intelligence -->
+        <div class="glass p-8 rounded-3xl card-hover group cursor-pointer" onclick="window.location.href='/ip-lookup'">
+            <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition-colors border border-blue-500/20">
+                <i class="fa-solid fa-location-dot text-blue-500 text-2xl"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">IP Intelligence</h3>
-            <p class="text-zinc-400 text-sm">Geolocation, ASN lookup, and abuse database checks for any IPv4 address.</p>
-            <div class="mt-4 text-blue-400 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
-                Launch Tool <i class="fa-solid fa-arrow-right"></i>
-            </div>
-        </div>
-
-        <div class="glass p-6 rounded-2xl hover:neon-border transition-all group cursor-pointer" onclick="window.location.href='/domain-lookup'">
-            <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500/40 transition-colors">
-                <i class="fa-solid fa-globe text-purple-500 text-xl"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-2">Domain Intelligence</h3>
-            <p class="text-zinc-400 text-sm">WHOIS data, DNS record enumeration, and website technology analysis.</p>
-            <div class="mt-4 text-purple-400 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
-                Launch Tool <i class="fa-solid fa-arrow-right"></i>
+            <h3 class="text-2xl font-bold mb-3 group-hover:text-blue-400 transition-colors">IP Intelligence</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                Map network assets, determine geographical origin, and analyze ASN reputations in seconds.
+            </p>
+            <div class="flex items-center justify-between text-blue-400 text-xs font-bold uppercase tracking-widest">
+                <span>Launch Tool</span>
+                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
             </div>
         </div>
 
-        <div class="glass p-6 rounded-2xl hover:neon-border transition-all group cursor-pointer" onclick="window.location.href='/identity-lookup'">
-            <div class="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-emerald-500/40 transition-colors">
-                <i class="fa-solid fa-user-secret text-emerald-500 text-xl"></i>
+        <!-- Domain Intelligence -->
+        <div class="glass p-8 rounded-3xl card-hover group cursor-pointer" onclick="window.location.href='/domain-lookup'">
+            <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition-colors border border-purple-500/20">
+                <i class="fa-solid fa-globe text-purple-500 text-2xl"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">Identity Lookup</h3>
-            <p class="text-zinc-400 text-sm">Cross-platform username search to map social media footprints.</p>
-            <div class="mt-4 text-emerald-400 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
-                Launch Tool <i class="fa-solid fa-arrow-right"></i>
+            <h3 class="text-2xl font-bold mb-3 group-hover:text-purple-400 transition-colors">Domain Intel</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                Analyze DNS records, WHOIS registration data, and identify surface-level technology stacks.
+            </p>
+            <div class="flex items-center justify-between text-purple-400 text-xs font-bold uppercase tracking-widest">
+                <span>Launch Tool</span>
+                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+            </div>
+        </div>
+
+        <!-- Identity Lookup -->
+        <div class="glass p-8 rounded-3xl card-hover group cursor-pointer" onclick="window.location.href='/identity-lookup'">
+            <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500/20 transition-colors border border-emerald-500/20">
+                <i class="fa-solid fa-user-secret text-emerald-500 text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 group-hover:text-emerald-400 transition-colors">Identity Mapping</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                Cross-reference handles across dozens of platforms to visualize a target's digital footprint.
+            </p>
+            <div class="flex items-center justify-between text-emerald-400 text-xs font-bold uppercase tracking-widest">
+                <span>Launch Tool</span>
+                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+            </div>
+        </div>
+
+        <!-- Email Intel -->
+        <div class="glass p-8 rounded-3xl card-hover group cursor-pointer" onclick="window.location.href='/email-lookup'">
+            <div class="w-14 h-14 bg-blue-400/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-400/20 transition-colors border border-blue-400/20">
+                <i class="fa-solid fa-envelope-circle-check text-blue-400 text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 group-hover:text-blue-300 transition-colors">Email Intel</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                Validate domain authenticity and audit Mail Exchange (MX) configurations for legitimacy.
+            </p>
+            <div class="flex items-center justify-between text-blue-300 text-xs font-bold uppercase tracking-widest">
+                <span>Launch Tool</span>
+                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+            </div>
+        </div>
+
+        <!-- Phone Intel -->
+        <div class="glass p-8 rounded-3xl card-hover group cursor-pointer" onclick="window.location.href='/phone-lookup'">
+            <div class="w-14 h-14 bg-emerald-400/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-400/20 transition-colors border border-emerald-400/20">
+                <i class="fa-solid fa-phone-volume text-emerald-400 text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 group-hover:text-emerald-300 transition-colors">Phone Intel</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                Generate precision search links for identifying phone owners across public records.
+            </p>
+            <div class="flex items-center justify-between text-emerald-300 text-xs font-bold uppercase tracking-widest">
+                <span>Launch Tool</span>
+                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+            </div>
+        </div>
+
+        <!-- VirusTotal Intel -->
+        <div class="glass p-8 rounded-3xl card-hover group cursor-pointer" onclick="window.location.href='/kicom-av'">
+            <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition-colors border border-blue-500/20">
+                <i class="fa-solid fa-shield-virus text-blue-500 text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 group-hover:text-blue-400 transition-colors">Kicom Intelligence</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                High-performance open source malware detection using the KicomAV engine.
+            </p>
+            <div class="flex items-center justify-between text-blue-400 text-xs font-bold uppercase tracking-widest">
+                <span>Launch Tool</span>
+                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+            </div>
+        </div>
+
+        <!-- Telemetry -->
+        <div class="glass p-8 rounded-3xl card-hover group cursor-pointer" onclick="window.location.href='/stats'">
+            <div class="w-14 h-14 bg-zinc-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-zinc-500/20 transition-colors border border-zinc-500/20">
+                <i class="fa-solid fa-microchip text-zinc-500 text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 group-hover:text-zinc-300 transition-colors">System Telemetry</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                Monitor real-time resource utilization and manage environment optimization.
+            </p>
+            <div class="flex items-center justify-between text-zinc-400 text-xs font-bold uppercase tracking-widest">
+                <span>Launch Tool</span>
+                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
             </div>
         </div>
     </div>
 
-    <div class="mt-12 glass p-8 rounded-2xl border-blue-500/20">
-        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-circle-info text-blue-500"></i> Investigation Guidelines
+    <div class="mt-16 glass p-10 rounded-3xl border-blue-500/10 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <i class="fa-solid fa-circle-info text-blue-500"></i> Investigation Protocol
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-zinc-400 text-sm">
-            <div class="flex gap-3">
-                <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
-                <p>Always verify results across multiple sources to avoid false positives.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-zinc-400 text-sm">
+            <div class="flex gap-4 p-4 rounded-2xl bg-zinc-900/50 border border-zinc-800">
+                <i class="fa-solid fa-shield-check text-emerald-500 mt-1"></i>
+                <p><strong class="text-zinc-200">Verification:</strong> Always triangulate findings across multiple modules to eliminate false positives.</p>
             </div>
-            <div class="flex gap-3">
-                <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
-                <p>Use VPNs and proxies when conducting active reconnaissance.</p>
+            <div class="flex gap-4 p-4 rounded-2xl bg-zinc-900/50 border border-zinc-800">
+                <i class="fa-solid fa-mask text-emerald-500 mt-1"></i>
+                <p><strong class="text-zinc-200">OpSec:</strong> Use tiered proxies or VPNs when performing active domain or IP reconnaissance.</p>
             </div>
-            <div class="flex gap-3">
-                <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
-                <p>Respect the terms of service of the platforms being queried.</p>
+            <div class="flex gap-4 p-4 rounded-2xl bg-zinc-900/50 border border-zinc-800">
+                <i class="fa-solid fa-scale-balanced text-emerald-500 mt-1"></i>
+                <p><strong class="text-zinc-200">Compliance:</strong> Ensure all activities adhere to the legal framework of your jurisdiction.</p>
             </div>
-            <div class="flex gap-3">
-                <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
-                <p>Document all findings with timestamps and source URLs for auditing.</p>
+            <div class="flex gap-4 p-4 rounded-2xl bg-zinc-900/50 border border-zinc-800">
+                <i class="fa-solid fa-file-export text-emerald-500 mt-1"></i>
+                <p><strong class="text-zinc-200">Documentation:</strong> Log all results with timestamps and source URLs for evidence chain stability.</p>
             </div>
         </div>
     </div>
